@@ -166,16 +166,17 @@ ContentContainer.Size = UDim2.new(0.75, 0, 1, -0.158)
 ContentContainer.Position = UDim2.new(0.25, 0, 0.158, 0)
 ContentContainer.Parent = MainFrame
 ContentContainer.ZIndex = 999999
+ContentContainer.ClipsDescendants = true
 
 local MainContent = Instance.new("ScrollingFrame")
 MainContent.Name = "MainContent"
 MainContent.BackgroundTransparency = 1
-MainContent.Size = UDim2.new(1, 0, 1, 0)
+MainContent.Size = UDim2.new(1, 0, 0.95, 0)
+MainContent.Position = UDim2.new(0, 0, 0, 0)
 MainContent.ScrollBarThickness = 2
-MainContent.CanvasSize = UDim2.new(0, 0, 0, 100)
+MainContent.CanvasSize = UDim2.new(0, 0, 0, 0)
 MainContent.Parent = ContentContainer
 MainContent.ZIndex = 999999
-MainContent.ClipsDescendants = true
 
 local ContentListLayout = Instance.new("UIListLayout")
 ContentListLayout.Padding = UDim.new(0, 8)
@@ -356,18 +357,15 @@ local function createTab(name, iconId)
 
             for _, child in pairs(MainContent:GetChildren()) do
                 if child:IsA("GuiObject") and child.Name ~= "UIListLayout" then
-                    child:Destroy()
+                    child.Visible = false
                 end
             end
 
             for _, element in pairs(tabs[name].elements) do
-                local clonedElement = element:Clone()
-                clonedElement.Parent = MainContent
+                element.Visible = true
             end
 
-            MainContent.CanvasPosition = Vector2.new(0, 0)
-            task.wait(0.05)
-            MainContent.CanvasSize = UDim2.new(0, 0, 0, ContentListLayout.AbsoluteContentSize.Y + 16)
+            MainContent.CanvasSize = UDim2.new(0, 0, 0, ContentListLayout.AbsoluteContentSize.Y + 20)
         end
     end)
 
@@ -391,6 +389,7 @@ local function createOption(name, startActive, tabName, callback)
     Container.Parent = MainContent
     Container.Name = name
     Container.ZIndex = 999999
+    Container.Visible = (tabName == activeTab)
 
     local UICorner = Instance.new("UICorner")
     UICorner.CornerRadius = UDim.new(0, 0)
@@ -484,6 +483,7 @@ local function createSlider(name, min, max, default, tabName, callback)
     Container.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
     Container.Parent = MainContent
     Container.ZIndex = 999999
+    Container.Visible = (tabName == activeTab)
 
     local UICorner = Instance.new("UICorner")
     UICorner.CornerRadius = UDim.new(0, 0)
@@ -589,6 +589,7 @@ local function createInfoBox(title, desc, tabName, isButton, linkToCopy)
     Container.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
     Container.Parent = MainContent
     Container.ZIndex = 999999
+    Container.Visible = (tabName == activeTab)
 
     local UICorner = Instance.new("UICorner")
     UICorner.CornerRadius = UDim.new(0, 0)
@@ -646,6 +647,7 @@ local function createSpecialButton(name, tabName, callback)
     Container.Parent = MainContent
     Container.Name = name
     Container.ZIndex = 999999
+    Container.Visible = (tabName == activeTab)
 
     local UICorner = Instance.new("UICorner")
     UICorner.CornerRadius = UDim.new(0, 0)
@@ -680,7 +682,7 @@ local function createSpecialButton(name, tabName, callback)
     table.insert(tabs[tabName].elements, Container)
 end
 
--- ==================== CRIAÇÃO DAS ABAS (ORDEM CORRIGIDA) ====================
+-- ==================== CRIAÇÃO DAS ABAS (ORDEM CORRETA) ====================
 tabs["Main"] = createTab("Main", "139357095045310")
 tabs["Farm"] = createTab("Farm", "102352181267949")
 tabs["Buy"] = createTab("Buy ALL", "110805385284419")
@@ -951,12 +953,10 @@ createInfoBox("Discord", "My Discord Server", "Credits", true, "https://discord.
 
 -- ==================== EXIBIÇÃO INICIAL ====================
 for _, element in pairs(tabs["Main"].elements) do
-    local clonedElement = element:Clone()
-    clonedElement.Parent = MainContent
+    element.Visible = true
 end
 
-task.wait(0.05)
-MainContent.CanvasSize = UDim2.new(0, 0, 0, ContentListLayout.AbsoluteContentSize.Y + 16)
+MainContent.CanvasSize = UDim2.new(0, 0, 0, ContentListLayout.AbsoluteContentSize.Y + 20)
 
 -- ==================== EVENTOS DOS BOTÕES ====================
 CloseButton.Activated:Connect(function()
