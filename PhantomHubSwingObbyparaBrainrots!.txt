@@ -46,302 +46,260 @@ local function setOptionState(name, value)
 end
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "PhantomHub_V1"
+ScreenGui.Name = "PhantomHub_V2"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.DisplayOrder = 999999
 ScreenGui.Parent = PlayerGui
 
+-- ==================== BOTÃO FLUTUANTE ====================
 local FloatingButton = Instance.new("TextButton")
-FloatingButton.Size = UDim2.new(0, 54, 0, 54)
-FloatingButton.Position = UDim2.new(0, 50, 0.15, -27)
-FloatingButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+FloatingButton.Size = UDim2.new(0.054, 0, 0.119, 0)
+FloatingButton.Position = UDim2.new(0.02, 0, 0.1, 0)
+FloatingButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 FloatingButton.Text = ""
 FloatingButton.Parent = ScreenGui
 FloatingButton.AutoButtonColor = false
 FloatingButton.ZIndex = 999999
 
-local UICornerBtn = Instance.new("UICorner")
-UICornerBtn.CornerRadius = UDim.new(0, 0)
-UICornerBtn.Parent = FloatingButton
-
 local FloatingButtonStroke = Instance.new("UIStroke")
 FloatingButtonStroke.Color = Color3.fromRGB(60, 60, 60)
-FloatingButtonStroke.Thickness = 2
+FloatingButtonStroke.Thickness = 3
+FloatingButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 FloatingButtonStroke.Parent = FloatingButton
-
-local InnerBtn = Instance.new("Frame")
-InnerBtn.Size = UDim2.new(0, 48, 0, 48)
-InnerBtn.Position = UDim2.new(0.5, -24, 0.5, -24)
-InnerBtn.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-InnerBtn.Parent = FloatingButton
-InnerBtn.ZIndex = 999999
-
-local UICornerInner = Instance.new("UICorner")
-UICornerInner.CornerRadius = UDim.new(0, 0)
-UICornerInner.Parent = InnerBtn
 
 local BtnLabel = Instance.new("ImageLabel")
 BtnLabel.Size = UDim2.new(1, 0, 1, 0)
 BtnLabel.BackgroundTransparency = 1
 BtnLabel.Image = "rbxassetid://121715364276099"
-BtnLabel.Parent = InnerBtn
+BtnLabel.Parent = FloatingButton
 BtnLabel.ZIndex = 999999
 
+-- ==================== PAINEL PRINCIPAL ====================
+local ShadowFrame = Instance.new("Frame")
+ShadowFrame.Name = "ShadowFrame"
+ShadowFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+ShadowFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+ShadowFrame.Size = UDim2.new(0.545, 0, 0.689, 0)
+ShadowFrame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+ShadowFrame.BorderSizePixel = 0
+ShadowFrame.Visible = false
+ShadowFrame.Parent = ScreenGui
+ShadowFrame.ZIndex = 999998
+
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 550, 0, 320)
-MainFrame.Position = UDim2.new(0.5, -275, 0.5, -160)
-MainFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+MainFrame.Name = "MainFrame"
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.Size = UDim2.new(0.54, 0, 0.68, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BorderSizePixel = 0
 MainFrame.Visible = false
 MainFrame.Parent = ScreenGui
 MainFrame.ZIndex = 999999
 
-local UICornerFrame = Instance.new("UICorner")
-UICornerFrame.CornerRadius = UDim.new(0, 0)
-UICornerFrame.Parent = MainFrame
+local OuterStroke = Instance.new("UIStroke")
+OuterStroke.Color = Color3.fromRGB(60, 60, 60)
+OuterStroke.Thickness = 3
+OuterStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+OuterStroke.Parent = ShadowFrame
 
-local MainFrameStroke = Instance.new("UIStroke")
-MainFrameStroke.Color = Color3.fromRGB(60, 60, 60)
-MainFrameStroke.Thickness = 2
-MainFrameStroke.Parent = MainFrame
+local InnerStroke = Instance.new("UIStroke")
+InnerStroke.Color = Color3.fromRGB(120, 120, 120)
+InnerStroke.Thickness = 2
+InnerStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+InnerStroke.Parent = MainFrame
 
-local InnerFrame = Instance.new("Frame")
-InnerFrame.Size = UDim2.new(1, -6, 1, -6)
-InnerFrame.Position = UDim2.new(0, 3, 0, 3)
-InnerFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-InnerFrame.Parent = MainFrame
-InnerFrame.ZIndex = 999999
-
-local UICornerInnerF = Instance.new("UICorner")
-UICornerInnerF.CornerRadius = UDim.new(0, 0)
-UICornerInnerF.Parent = InnerFrame
-
+-- ==================== BARRA SUPERIOR ====================
 local TopBar = Instance.new("Frame")
-TopBar.Size = UDim2.new(1, 0, 0, 45)
-TopBar.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-TopBar.Parent = InnerFrame
+TopBar.Name = "TopBar"
+TopBar.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+TopBar.BorderSizePixel = 0
+TopBar.Size = UDim2.new(1, 0, 0.158, 0)
+TopBar.Position = UDim2.new(0, 0, 0, 0)
+TopBar.Parent = MainFrame
 TopBar.ZIndex = 999999
 
-local TopBarStroke = Instance.new("UIStroke")
-TopBarStroke.Color = Color3.fromRGB(60, 60, 60)
-TopBarStroke.Thickness = 1
-TopBarStroke.Parent = TopBar
+local Title = Instance.new("TextLabel")
+Title.Name = "Title"
+Title.BackgroundTransparency = 1
+Title.Position = UDim2.new(0.02, 0, 0, 0)
+Title.Size = UDim2.new(1, 0, 1, 0)
+Title.Font = Enum.Font.GothamBold
+Title.Text = "Phantom Hub"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.TextSize = 16
+Title.Parent = TopBar
+Title.ZIndex = 999999
 
-local TopCorner = Instance.new("UICorner")
-TopCorner.CornerRadius = UDim.new(0, 0)
-TopCorner.Parent = TopBar
+local CloseButton = Instance.new("TextButton")
+CloseButton.Name = "CloseButton"
+CloseButton.BackgroundTransparency = 1
+CloseButton.Position = UDim2.new(0.92, 0, 0, 0)
+CloseButton.Size = UDim2.new(0.08, 0, 1, 0)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.TextSize = 18
+CloseButton.Parent = TopBar
+CloseButton.ZIndex = 999999
 
-local ScriptTitle = Instance.new("TextLabel")
-ScriptTitle.Size = UDim2.new(0, 150, 1, 0)
-ScriptTitle.Position = UDim2.new(0, 10, 0, 0)
-ScriptTitle.Text = "Phantom Hub"
-ScriptTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-ScriptTitle.Font = Enum.Font.SourceSansBold
-ScriptTitle.TextSize = 22
-ScriptTitle.TextXAlignment = Enum.TextXAlignment.Left
-ScriptTitle.BackgroundTransparency = 1
-ScriptTitle.Parent = TopBar
-ScriptTitle.ZIndex = 999999
+-- ==================== CONTAINER DE ABAS ====================
+local TabContainer = Instance.new("Frame")
+TabContainer.Name = "TabContainer"
+TabContainer.BackgroundTransparency = 1
+TabContainer.Size = UDim2.new(0.25, 0, 1, -0.158)
+TabContainer.Position = UDim2.new(0, 0, 0.158, 0)
+TabContainer.Parent = MainFrame
+TabContainer.ZIndex = 999999
 
-local TitleStroke = Instance.new("UIStroke")
-TitleStroke.Color = Color3.fromRGB(30, 30, 30)
-TitleStroke.Thickness = 1
-TitleStroke.Parent = ScriptTitle
+local TabScrollFrame = Instance.new("ScrollingFrame")
+TabScrollFrame.Name = "TabScrollFrame"
+TabScrollFrame.BackgroundTransparency = 1
+TabScrollFrame.Size = UDim2.new(1, 0, 1, 0)
+TabScrollFrame.ScrollBarThickness = 0
+TabScrollFrame.Parent = TabContainer
+TabScrollFrame.ZIndex = 999999
 
-local CloseBtn = Instance.new("TextButton")
-CloseBtn.Size = UDim2.new(0, 32, 0, 32)
-CloseBtn.Position = UDim2.new(1, -42, 0.5, -16)
-CloseBtn.BackgroundTransparency = 1
-CloseBtn.Text = "X"
-CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-CloseBtn.Font = Enum.Font.SourceSansBold
-CloseBtn.TextSize = 18
-CloseBtn.Parent = TopBar
-CloseBtn.AutoButtonColor = false
-CloseBtn.ZIndex = 999999
+local TabListLayout = Instance.new("UIListLayout")
+TabListLayout.Padding = UDim.new(0, 5)
+TabListLayout.Parent = TabScrollFrame
 
-local UICornerClose = Instance.new("UICorner")
-UICornerClose.CornerRadius = UDim.new(0, 0)
-UICornerClose.Parent = CloseBtn
-
-local SideBar = Instance.new("Frame")
-SideBar.Size = UDim2.new(0, 140, 1, -45)
-SideBar.Position = UDim2.new(0, 0, 0, 45)
-SideBar.BackgroundTransparency = 1
-SideBar.Parent = InnerFrame
-SideBar.ZIndex = 999999
+-- ==================== CONTAINER DE CONTEÚDO ====================
+local ContentContainer = Instance.new("Frame")
+ContentContainer.Name = "ContentContainer"
+ContentContainer.BackgroundTransparency = 1
+ContentContainer.Size = UDim2.new(0.75, 0, 1, -0.158)
+ContentContainer.Position = UDim2.new(0.25, 0, 0.158, 0)
+ContentContainer.Parent = MainFrame
+ContentContainer.ZIndex = 999999
 
 local MainContent = Instance.new("ScrollingFrame")
-MainContent.Size = UDim2.new(1, -150, 1, -60)
-MainContent.Position = UDim2.new(0, 145, 0, 45)
+MainContent.Name = "MainContent"
 MainContent.BackgroundTransparency = 1
+MainContent.Size = UDim2.new(1, 0, 1, 0)
 MainContent.ScrollBarThickness = 2
 MainContent.CanvasSize = UDim2.new(0, 0, 0, 0)
-MainContent.Parent = InnerFrame
+MainContent.Parent = ContentContainer
 MainContent.ZIndex = 999999
 
-local options = {Main = {}, Buy = {}, Farm = {}, Config = {}, Credits = {}}
+local ContentListLayout = Instance.new("UIListLayout")
+ContentListLayout.Padding = UDim.new(0, 8)
+ContentListLayout.Parent = MainContent
+
+-- ==================== VARIÁVEIS ====================
+local tabs = {}
 local activeTab = "Main"
-local expandedOptions = {}
-local allSubFrames = {}
-
 local notificationTimers = {}
+local speedValue = 32
+local flySpeed = 32
+local connectionStorage = {}
 
+-- ==================== FUNÇÕES DE NOTIFICAÇÃO ====================
 local function showNotification(title, iconId, duration)
-	local notificationScreenGui = Instance.new("ScreenGui")
-	notificationScreenGui.Name = "NotificationScreenGui"
-	notificationScreenGui.ResetOnSpawn = false
-	notificationScreenGui.DisplayOrder = 999999
-	notificationScreenGui.Parent = PlayerGui
-	
-	local notificationGui = Instance.new("Frame")
-	notificationGui.Name = "NotificationGui"
-	notificationGui.Size = UDim2.new(0, 300, 0, 60)
-	notificationGui.Position = UDim2.new(1, 20, 1, -100)
-	notificationGui.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-	notificationGui.BorderSizePixel = 2
-	notificationGui.BorderColor3 = Color3.fromRGB(128, 128, 128)
-	notificationGui.Parent = notificationScreenGui
-	notificationGui.ZIndex = 999999
-
-	local notificationIcon = Instance.new("ImageLabel")
-	notificationIcon.Name = "NotificationIcon"
-	notificationIcon.Size = UDim2.new(0, 40, 0, 40)
-	notificationIcon.Position = UDim2.new(0, 10, 0.5, -20)
-	notificationIcon.BackgroundTransparency = 1
-	notificationIcon.Image = "rbxassetid://" .. iconId
-	notificationIcon.Parent = notificationGui
-	notificationIcon.ZIndex = 999999
-
-	local notificationLabel = Instance.new("TextLabel")
-	notificationLabel.Name = "NotificationLabel"
-	notificationLabel.Size = UDim2.new(1, -60, 1, 0)
-	notificationLabel.Position = UDim2.new(0, 50, 0, 0)
-	notificationLabel.BackgroundTransparency = 1
-	notificationLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-	notificationLabel.TextSize = 14
-	notificationLabel.Font = Enum.Font.Gotham
-	notificationLabel.Text = title
-	notificationLabel.TextWrapped = true
-	notificationLabel.TextXAlignment = Enum.TextXAlignment.Left
-	notificationLabel.Parent = notificationGui
-	notificationLabel.ZIndex = 999999
-
-	local progressLine = Instance.new("Frame")
-	progressLine.Name = "ProgressLine"
-	progressLine.Size = UDim2.new(0, 0, 0, 2)
-	progressLine.Position = UDim2.new(0, 0, 1, 0)
-	progressLine.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	progressLine.BorderSizePixel = 0
-	progressLine.Parent = notificationGui
-	progressLine.ZIndex = 999999
-
-	local startTime = tick()
-	local totalWidth = 300
-	local notificationId = tostring(math.random(100000, 999999))
-
-	notificationTimers[notificationId] = {
-		startTime = startTime,
-		duration = duration,
-		gui = notificationGui,
-		screenGui = notificationScreenGui
-	}
-
-	local slideInTween = TweenService:Create(
-		notificationGui,
-		TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-		{Position = UDim2.new(1, -320, 1, -100)}
-	)
-	slideInTween:Play()
-
-	local progressConnection
-	progressConnection = RunService.RenderStepped:Connect(function()
-		if notificationTimers[notificationId] == nil then
-			progressConnection:Disconnect()
-			return
-		end
-
-		local elapsed = tick() - notificationTimers[notificationId].startTime
-		local progress = math.min(elapsed / notificationTimers[notificationId].duration, 1)
-
-		if notificationGui and notificationGui.Parent then
-			progressLine.Size = UDim2.new(0, totalWidth * progress, 0, 2)
-		end
-
-		if progress >= 1 then
-			progressConnection:Disconnect()
-		end
-	end)
-end
-
-local function createTabBtn(name, posIdx, iconId)
-    local Btn = Instance.new("TextButton")
-    Btn.Size = UDim2.new(0.85, 0, 0, 40)
-    Btn.Position = UDim2.new(0.075, 0, 0, 20 + (posIdx * 50))
-    Btn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    Btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Btn.Text = ""
-    Btn.Font = Enum.Font.SourceSansBold
-    Btn.TextSize = 18
-    Btn.Parent = SideBar
-    Btn.AutoButtonColor = false
-    Btn.ZIndex = 999999
-    Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 0)
-
-    local BtnContainer = Instance.new("Frame")
-    BtnContainer.Size = UDim2.new(1, 0, 1, 0)
-    BtnContainer.BackgroundTransparency = 1
-    BtnContainer.Parent = Btn
-    BtnContainer.ZIndex = 999999
-
-    local IconLabel = Instance.new("ImageLabel")
-    IconLabel.Size = UDim2.new(0, 24, 0, 24)
-    IconLabel.Position = UDim2.new(0, 8, 0.5, -12)
-    IconLabel.BackgroundTransparency = 1
-    IconLabel.Image = "rbxasset://textures/Cursors/MouseLockedCursor.png"
-    if iconId then
-        IconLabel.Image = "rbxassetid://" .. iconId
-    end
-    IconLabel.Parent = BtnContainer
-    IconLabel.ZIndex = 999999
-
-    local TextLabel = Instance.new("TextLabel")
-    TextLabel.Size = UDim2.new(1, -40, 1, 0)
-    TextLabel.Position = UDim2.new(0, 40, 0, 0)
-    TextLabel.BackgroundTransparency = 1
-    TextLabel.Text = name
-    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-    TextLabel.Font = Enum.Font.SourceSansBold
-    TextLabel.TextSize = 18
-    TextLabel.Parent = BtnContainer
-    TextLabel.ZIndex = 999999
-
-    return Btn
-end
-
-local TabMain = createTabBtn("Main", 0, "139357095045310")
-local TabFarm = createTabBtn("Farm", 1, "102352181267949")
-local TabBuy = createTabBtn("Buy ALL", 2, "110805385284419")
-local TabConfig = createTabBtn("Config", 3, "114794077382466")
-local TabCredits = createTabBtn("Credits", 4, "99243311837005")
-
-local function repositionElements(tab)
-    local yPos = 0
-    for _, elem in ipairs(options[tab]) do
-        if elem.Visible then
-            elem.Position = UDim2.new(0, 0, 0, yPos)
-            yPos = yPos + elem.Size.Y.Offset + 10
-        end
-    end
+    local notificationScreenGui = Instance.new("ScreenGui")
+    notificationScreenGui.Name = "NotificationScreenGui"
+    notificationScreenGui.ResetOnSpawn = false
+    notificationScreenGui.DisplayOrder = 999999
+    notificationScreenGui.Parent = PlayerGui
     
-    if tab == "Main" then
-        MainContent.CanvasSize = UDim2.new(0, 0, 0, yPos + 50)
-        MainContent.CanvasPosition = Vector2.new(0, 0)
-    else
-        MainContent.CanvasSize = UDim2.new(0, 0, 0, yPos + 50)
-    end
+    local notificationGui = Instance.new("Frame")
+    notificationGui.Name = "NotificationGui"
+    notificationGui.Size = UDim2.new(0.3, 0, 0.08, 0)
+    notificationGui.Position = UDim2.new(1, 20, 1, -100)
+    notificationGui.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    notificationGui.BorderColor3 = Color3.fromRGB(128, 128, 128)
+    notificationGui.BorderSizePixel = 2
+    notificationGui.Parent = notificationScreenGui
+    notificationGui.ZIndex = 999999
+
+    local notificationIcon = Instance.new("ImageLabel")
+    notificationIcon.Name = "NotificationIcon"
+    notificationIcon.Size = UDim2.new(0.1, 0, 0.8, 0)
+    notificationIcon.Position = UDim2.new(0.02, 0, 0.1, 0)
+    notificationIcon.BackgroundTransparency = 1
+    notificationIcon.Image = "rbxassetid://" .. iconId
+    notificationIcon.Parent = notificationGui
+    notificationIcon.ZIndex = 999999
+
+    local notificationLabel = Instance.new("TextLabel")
+    notificationLabel.Name = "NotificationLabel"
+    notificationLabel.Size = UDim2.new(0.85, 0, 1, 0)
+    notificationLabel.Position = UDim2.new(0.12, 0, 0, 0)
+    notificationLabel.BackgroundTransparency = 1
+    notificationLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    notificationLabel.TextSize = 14
+    notificationLabel.Font = Enum.Font.Gotham
+    notificationLabel.Text = title
+    notificationLabel.TextWrapped = true
+    notificationLabel.TextXAlignment = Enum.TextXAlignment.Left
+    notificationLabel.Parent = notificationGui
+    notificationLabel.ZIndex = 999999
+
+    local progressLine = Instance.new("Frame")
+    progressLine.Name = "ProgressLine"
+    progressLine.Size = UDim2.new(0, 0, 0.03, 0)
+    progressLine.Position = UDim2.new(0, 0, 1, 0)
+    progressLine.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    progressLine.BorderSizePixel = 0
+    progressLine.Parent = notificationGui
+    progressLine.ZIndex = 999999
+
+    local startTime = tick()
+    local totalWidth = notificationGui.AbsoluteSize.X
+    local notificationId = tostring(math.random(100000, 999999))
+
+    notificationTimers[notificationId] = {
+        startTime = startTime,
+        duration = duration,
+        gui = notificationGui,
+        screenGui = notificationScreenGui
+    }
+
+    local slideInTween = TweenService:Create(
+        notificationGui,
+        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+        {Position = UDim2.new(1, -320, 1, -100)}
+    )
+    slideInTween:Play()
+
+    local progressConnection
+    progressConnection = RunService.RenderStepped:Connect(function()
+        if notificationTimers[notificationId] == nil then
+            progressConnection:Disconnect()
+            return
+        end
+
+        local elapsed = tick() - notificationTimers[notificationId].startTime
+        local progress = math.min(elapsed / notificationTimers[notificationId].duration, 1)
+
+        if notificationGui and notificationGui.Parent then
+            local currentWidth = notificationGui.AbsoluteSize.X
+            progressLine.Size = UDim2.new(currentWidth * progress, 0, 0.03, 0)
+        end
+
+        if progress >= 1 then
+            progressConnection:Disconnect()
+
+            if notificationGui and notificationGui.Parent then
+                local slideOutTween = TweenService:Create(
+                    notificationGui,
+                    TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+                    {Position = UDim2.new(1, 20, 1, -100)}
+                )
+                slideOutTween:Play()
+
+                slideOutTween.Completed:Connect(function()
+                    if notificationGui then notificationGui:Destroy() end
+                    if notificationScreenGui then notificationScreenGui:Destroy() end
+                    notificationTimers[notificationId] = nil
+                end)
+            end
+        end
+    end)
 end
 
+-- ==================== FUNÇÕES DE DEBOUNCE ====================
 local function createDebounce(key, duration)
     if not optionStates["_debounce"] then optionStates["_debounce"] = {} end
     if optionStates["_debounce"][key] then return false end
@@ -350,20 +308,100 @@ local function createDebounce(key, duration)
     return true
 end
 
-local connectionStorage = {}
+-- ==================== FUNÇÕES DE CRIAÇÃO DE ELEMENTOS ====================
+local function createTab(name, iconId)
+    local TabButton = Instance.new("TextButton")
+    TabButton.Name = name
+    TabButton.Size = UDim2.new(0.9, 0, 0, 50)
+    TabButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TabButton.Text = ""
+    TabButton.Font = Enum.Font.SourceSansBold
+    TabButton.TextSize = 16
+    TabButton.Parent = TabScrollFrame
+    TabButton.AutoButtonColor = false
+    TabButton.ZIndex = 999999
 
-local function createOption(name, startActive, tab, callback)
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 0)
+    UICorner.Parent = TabButton
+
+    local BtnStroke = Instance.new("UIStroke")
+    BtnStroke.Color = Color3.fromRGB(60, 60, 60)
+    BtnStroke.Thickness = 1
+    BtnStroke.Parent = TabButton
+
+    local IconLabel = Instance.new("ImageLabel")
+    IconLabel.Size = UDim2.new(0.25, 0, 0.6, 0)
+    IconLabel.Position = UDim2.new(0.05, 0, 0.2, 0)
+    IconLabel.BackgroundTransparency = 1
+    IconLabel.Image = "rbxassetid://" .. iconId
+    IconLabel.Parent = TabButton
+    IconLabel.ZIndex = 999999
+
+    local TextLabel = Instance.new("TextLabel")
+    TextLabel.Size = UDim2.new(0.65, 0, 1, 0)
+    TextLabel.Position = UDim2.new(0.3, 0, 0, 0)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.Text = name
+    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+    TextLabel.Font = Enum.Font.SourceSansBold
+    TextLabel.TextSize = 14
+    TextLabel.Parent = TabButton
+    TextLabel.ZIndex = 999999
+
+    TabButton.MouseButton1Click:Connect(function()
+        if activeTab ~= name then
+            -- Desselecionar aba anterior
+            for _, tab in pairs(tabs) do
+                tab.button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+            end
+
+            -- Selecionar aba atual
+            activeTab = name
+            TabButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+
+            -- Atualizar conteúdo
+            for _, child in pairs(MainContent:GetChildren()) do
+                if child:IsA("GuiObject") and child.Name ~= "UIListLayout" then
+                    child:Destroy()
+                end
+            end
+
+            for _, element in pairs(tabs[name].elements) do
+                local clonedElement = element:Clone()
+                clonedElement.Parent = MainContent
+            end
+
+            MainContent.CanvasSize = UDim2.new(0, 0, 0, ContentListLayout.AbsoluteContentSize.Y + 20)
+        end
+    end)
+
+    if activeTab == name then
+        TabButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+    end
+
+    return {
+        button = TabButton,
+        elements = {}
+    }
+end
+
+local function createOption(name, startActive, tabName, callback)
     createOptionState(name, startActive)
     local currentActive = optionStates[name]
 
     local Container = Instance.new("Frame")
     Container.Size = UDim2.new(1, -16, 0, 50)
     Container.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    Container.Visible = (tab == activeTab)
     Container.Parent = MainContent
     Container.Name = name
     Container.ZIndex = 999999
-    Instance.new("UICorner", Container).CornerRadius = UDim.new(0, 0)
+
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 0)
+    UICorner.Parent = Container
 
     local ContainerStroke = Instance.new("UIStroke")
     ContainerStroke.Color = Color3.fromRGB(60, 60, 60)
@@ -378,7 +416,7 @@ local function createOption(name, startActive, tab, callback)
     Label.BackgroundTransparency = 1
     Label.TextXAlignment = Enum.TextXAlignment.Left
     Label.Font = Enum.Font.SourceSans
-    Label.TextSize = 16
+    Label.TextSize = 14
     Label.Parent = Container
     Label.ZIndex = 999999
 
@@ -390,7 +428,10 @@ local function createOption(name, startActive, tab, callback)
     SwitchBG.Parent = Container
     SwitchBG.AutoButtonColor = false
     SwitchBG.ZIndex = 999999
-    Instance.new("UICorner", SwitchBG).CornerRadius = UDim.new(0, 0)
+
+    local SwitchCorner = Instance.new("UICorner")
+    SwitchCorner.CornerRadius = UDim.new(0, 0)
+    SwitchCorner.Parent = SwitchBG
 
     local SwitchStroke = Instance.new("UIStroke")
     SwitchStroke.Color = Color3.fromRGB(60, 60, 60)
@@ -403,9 +444,10 @@ local function createOption(name, startActive, tab, callback)
     Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Circle.Parent = SwitchBG
     Circle.ZIndex = 999999
-    Instance.new("UICorner", Circle).CornerRadius = UDim.new(0, 0)
 
-    local SubFrame = nil
+    local CircleCorner = Instance.new("UICorner")
+    CircleCorner.CornerRadius = UDim.new(0, 0)
+    CircleCorner.Parent = Circle
 
     local function toggleSwitch()
         if createDebounce(name, 0.05) then
@@ -415,53 +457,44 @@ local function createOption(name, startActive, tab, callback)
             Circle:TweenPosition(optionStates[name] and UDim2.new(1, -21, 0.5, -9) or UDim2.new(0, 3, 0.5, -9), "Out", "Quad", 0.2, true)
             SwitchBG.BackgroundColor3 = optionStates[name] and Color3.fromRGB(100, 150, 200) or Color3.fromRGB(40, 40, 40)
 
-            if callback then 
+            if callback then
                 task.wait(0.05)
                 task.spawn(function() callback(optionStates[name]) end)
             end
-
-            if SubFrame then
-                SubFrame.Visible = false
-                expandedOptions[name] = false
-            end
-
-            repositionElements(activeTab)
         end
     end
 
     if not connectionStorage[name] then
         connectionStorage[name] = {}
     end
-    
+
     if connectionStorage[name].activated then
         pcall(function() connectionStorage[name].activated:Disconnect() end)
     end
-    
+
     connectionStorage[name].activated = SwitchBG.Activated:Connect(toggleSwitch)
 
     if currentActive and callback then
         task.spawn(function() callback(currentActive) end)
     end
 
-    table.insert(options[tab], Container)
-    repositionElements(tab)
+    table.insert(tabs[tabName].elements, Container)
     return function() return optionStates[name] end, Container, SwitchBG
 end
 
-local speedValue = 32
-local flySpeed = 32
-
-local function createSlider(name, min, max, default, tab, callback)
+local function createSlider(name, min, max, default, tabName, callback)
     createOptionState(name, default)
     local currentVal = optionStates[name]
 
     local Container = Instance.new("Frame")
-    Container.Size = UDim2.new(1, -16, 0, 60)
+    Container.Size = UDim2.new(1, -16, 0, 70)
     Container.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    Container.Visible = (tab == activeTab)
     Container.Parent = MainContent
     Container.ZIndex = 999999
-    Instance.new("UICorner", Container).CornerRadius = UDim.new(0, 0)
+
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 0)
+    UICorner.Parent = Container
 
     local SliderStroke = Instance.new("UIStroke")
     SliderStroke.Color = Color3.fromRGB(60, 60, 60)
@@ -476,7 +509,7 @@ local function createSlider(name, min, max, default, tab, callback)
     Label.BackgroundTransparency = 1
     Label.TextXAlignment = Enum.TextXAlignment.Left
     Label.Font = Enum.Font.SourceSans
-    Label.TextSize = 16
+    Label.TextSize = 14
     Label.Parent = Container
     Label.ZIndex = 999999
 
@@ -488,7 +521,10 @@ local function createSlider(name, min, max, default, tab, callback)
     SliderBG.Parent = Container
     SliderBG.AutoButtonColor = false
     SliderBG.ZIndex = 999999
-    Instance.new("UICorner", SliderBG).CornerRadius = UDim.new(0, 0)
+
+    local SliderCorner = Instance.new("UICorner")
+    SliderCorner.CornerRadius = UDim.new(0, 0)
+    SliderCorner.Parent = SliderBG
 
     local SliderFill = Instance.new("Frame")
     local startScale = (currentVal - min) / (max - min)
@@ -496,7 +532,10 @@ local function createSlider(name, min, max, default, tab, callback)
     SliderFill.BackgroundColor3 = Color3.fromRGB(100, 150, 200)
     SliderFill.Parent = SliderBG
     SliderFill.ZIndex = 999999
-    Instance.new("UICorner", SliderFill).CornerRadius = UDim.new(0, 0)
+
+    local FillCorner = Instance.new("UICorner")
+    FillCorner.CornerRadius = UDim.new(0, 0)
+    FillCorner.Parent = SliderFill
 
     local Circle = Instance.new("Frame")
     Circle.Size = UDim2.new(0, 14, 0, 14)
@@ -504,7 +543,10 @@ local function createSlider(name, min, max, default, tab, callback)
     Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Circle.Parent = SliderFill
     Circle.ZIndex = 999999
-    Instance.new("UICorner", Circle).CornerRadius = UDim.new(0, 0)
+
+    local CircleCorner = Instance.new("UICorner")
+    CircleCorner.CornerRadius = UDim.new(0, 0)
+    CircleCorner.Parent = Circle
 
     if callback then
         task.spawn(function() callback(currentVal) end)
@@ -530,7 +572,7 @@ local function createSlider(name, min, max, default, tab, callback)
             updateSlider(input)
         end
     end)
-    
+
     UserInputService.InputChanged:Connect(function(input)
         if dragging then
             if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
@@ -538,25 +580,26 @@ local function createSlider(name, min, max, default, tab, callback)
             end
         end
     end)
-    
+
     UserInputService.InputEnded:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = false
         end
     end)
 
-    table.insert(options[tab], Container)
-    repositionElements(tab)
+    table.insert(tabs[tabName].elements, Container)
 end
 
-local function createInfoBox(title, desc, tab, isButton, linkToCopy)
+local function createInfoBox(title, desc, tabName, isButton, linkToCopy)
     local Container = Instance.new("Frame")
-    Container.Size = UDim2.new(1, -16, 0, 45)
+    Container.Size = UDim2.new(1, -16, 0, 50)
     Container.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    Container.Visible = (tab == activeTab)
     Container.Parent = MainContent
     Container.ZIndex = 999999
-    Instance.new("UICorner", Container).CornerRadius = UDim.new(0, 0)
+
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 0)
+    UICorner.Parent = Container
 
     local InfoStroke = Instance.new("UIStroke")
     InfoStroke.Color = Color3.fromRGB(60, 60, 60)
@@ -571,7 +614,7 @@ local function createInfoBox(title, desc, tab, isButton, linkToCopy)
     TitleLabel.BackgroundTransparency = 1
     TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
     TitleLabel.Font = Enum.Font.SourceSansBold
-    TitleLabel.TextSize = 16
+    TitleLabel.TextSize = 14
     TitleLabel.Parent = Container
     TitleLabel.ZIndex = 999999
 
@@ -583,7 +626,7 @@ local function createInfoBox(title, desc, tab, isButton, linkToCopy)
     DescLabel.BackgroundTransparency = 1
     DescLabel.TextXAlignment = Enum.TextXAlignment.Left
     DescLabel.Font = Enum.Font.SourceSans
-    DescLabel.TextSize = 12
+    DescLabel.TextSize = 11
     DescLabel.Parent = Container
     DescLabel.ZIndex = 999999
 
@@ -600,19 +643,20 @@ local function createInfoBox(title, desc, tab, isButton, linkToCopy)
         end)
     end
 
-    table.insert(options[tab], Container)
-    repositionElements(tab)
+    table.insert(tabs[tabName].elements, Container)
 end
 
-local function createSpecialButton(name, tab, callback)
+local function createSpecialButton(name, tabName, callback)
     local Container = Instance.new("Frame")
     Container.Size = UDim2.new(1, -16, 0, 50)
     Container.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    Container.Visible = (tab == activeTab)
     Container.Parent = MainContent
     Container.Name = name
     Container.ZIndex = 999999
-    Instance.new("UICorner", Container).CornerRadius = UDim.new(0, 0)
+
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 0)
+    UICorner.Parent = Container
 
     local ContainerStroke = Instance.new("UIStroke")
     ContainerStroke.Color = Color3.fromRGB(60, 60, 60)
@@ -626,7 +670,7 @@ local function createSpecialButton(name, tab, callback)
     Label.BackgroundTransparency = 1
     Label.TextXAlignment = Enum.TextXAlignment.Center
     Label.Font = Enum.Font.SourceSans
-    Label.TextSize = 16
+    Label.TextSize = 14
     Label.Parent = Container
     Label.ZIndex = 999999
 
@@ -640,46 +684,19 @@ local function createSpecialButton(name, tab, callback)
         end
     end)
 
-    table.insert(options[tab], Container)
-    repositionElements(tab)
+    table.insert(tabs[tabName].elements, Container)
 end
 
-local Toggles = {}
+-- ==================== CRIAÇÃO DAS ABAS ====================
+tabs["Main"] = createTab("Main", "139357095045310")
+tabs["Farm"] = createTab("Farm", "102352181267949")
+tabs["Buy"] = createTab("Buy ALL", "110805385284419")
+tabs["Config"] = createTab("Config", "114794077382466")
+tabs["Credits"] = createTab("Credits", "99243311837005")
 
-for toggleName, _ in pairs({
-    ["Auto Collect Money"] = false,
-    ["Auto Plot Upgrade"] = false,
-    ["Auto Rebirth"] = false,
-    ["Low Mode"] = false,
-    ["Auto Common"] = false,
-    ["Auto Uncommon"] = false,
-    ["Auto Rare"] = false,
-    ["Auto Epic"] = false,
-    ["Auto Legendary"] = false,
-    ["Auto Mythic"] = false,
-    ["Auto Secret"] = false,
-    ["Auto Ancient"] = false,
-    ["Auto Divine"] = false,
-    ["Auto Ice Emblem"] = false,
-    ["Auto Victrola"] = false,
-    ["Auto Power"] = false,
-    ["Auto Carry"] = false,
-    ["Auto Reach"] = false,
-    ["Anti AFK"] = false,
-    ["Anti Cheat"] = false,
-    ["Infinite Jump"] = false,
-    ["Enable Speed"] = false,
-    ["Fly"] = false,
-    ["Noclip"] = false
-}) do
-    Toggles[toggleName] = createOptionState(toggleName, false)
-end
+-- ==================== POPULAÇÃO DAS ABAS ====================
 
-local lowModeBackup = {
-    lighting = {},
-    parts = {}
-}
-
+-- ABA MAIN
 createOption("Auto Collect Money", false, "Main", function(state)
     getgenv().AutoCollect = state
 
@@ -862,13 +879,6 @@ createOption("Low Mode", false, "Main", function(state)
         pcall(function()
             local lighting = game:GetService("Lighting")
             
-            lowModeBackup.lighting = {
-                brightness = lighting.Brightness,
-                ambient = lighting.Ambient,
-                outdoorAmbient = lighting.OutdoorAmbient,
-                globalShadows = lighting.GlobalShadows or false
-            }
-            
             lighting.Brightness = 0.3
             lighting.Ambient = Color3.fromRGB(50, 50, 50)
             lighting.OutdoorAmbient = Color3.fromRGB(50, 50, 50)
@@ -876,17 +886,9 @@ createOption("Low Mode", false, "Main", function(state)
                 lighting.GlobalShadows = false
             end
             
-            lowModeBackup.parts = {}
-            
             for _, part in pairs(workspace:GetDescendants()) do
                 if part:IsA("BasePart") then
                     pcall(function()
-                        local partBackup = {
-                            textureID = part.TextureID or "",
-                            instance = part
-                        }
-                        table.insert(lowModeBackup.parts, partBackup)
-                        
                         part.TextureID = ""
                     end)
                     
@@ -904,36 +906,14 @@ createOption("Low Mode", false, "Main", function(state)
         pcall(function()
             local lighting = game:GetService("Lighting")
             
-            if lowModeBackup.lighting.brightness then
-                lighting.Brightness = lowModeBackup.lighting.brightness
-            end
-            if lowModeBackup.lighting.ambient then
-                lighting.Ambient = lowModeBackup.lighting.ambient
-            end
-            if lowModeBackup.lighting.outdoorAmbient then
-                lighting.OutdoorAmbient = lowModeBackup.lighting.outdoorAmbient
-            end
-            
-            for _, partBackup in ipairs(lowModeBackup.parts) do
-                pcall(function()
-                    if partBackup.instance and partBackup.instance.Parent then
-                        if partBackup.textureID and partBackup.textureID ~= "" then
-                            partBackup.instance.TextureID = partBackup.textureID
-                        end
-                    end
-                end)
-            end
-            
-            lowModeBackup.parts = {}
-            lowModeBackup.lighting = {}
+            lighting.Brightness = 1
+            lighting.Ambient = Color3.fromRGB(200, 200, 200)
+            lighting.OutdoorAmbient = Color3.fromRGB(200, 200, 200)
         end)
     end
 end)
 
-createOption("Auto Power", false, "Buy")
-createOption("Auto Reach", false, "Buy")
-createOption("Auto Carry", false, "Buy")
-
+-- ABA FARM
 createOption("Auto Common", false, "Farm")
 createOption("Auto Uncommon", false, "Farm")
 createOption("Auto Rare", false, "Farm")
@@ -944,6 +924,12 @@ createOption("Auto Secret", false, "Farm")
 createOption("Auto Ancient", false, "Farm")
 createOption("Auto Divine", false, "Farm")
 
+-- ABA BUY
+createOption("Auto Power", false, "Buy")
+createOption("Auto Reach", false, "Buy")
+createOption("Auto Carry", false, "Buy")
+
+-- ABA CONFIG
 createSpecialButton("Auto Rejoin", "Config", function()
     TeleportService:Teleport(game.PlaceId)
 end)
@@ -964,81 +950,32 @@ createSlider("Fly Speed", 1, 500, 32, "Config", function(value)
     flySpeed = value
 end)
 createOption("Noclip", false, "Config")
+createOption("Enable Shift Lock", false, "Config")
 
+-- ABA CREDITS
 createInfoBox("By: Cleiton10HDx", "Script created by this user.", "Credits", false)
 createInfoBox("Discord", "My Discord Server", "Credits", true, "https://discord.gg/72P6NhC5Pf")
 
-repositionElements("Main")
-repositionElements("Buy")
-repositionElements("Farm")
-repositionElements("Config")
-repositionElements("Credits")
-
-local function showTab(tabName)
-    activeTab = tabName
-    for tab, list in pairs(options) do
-        for _, v in ipairs(list) do
-            v.Visible = (tab == tabName)
-        end
-    end
-    
-    for _, subframeData in ipairs(allSubFrames) do
-        if subframeData.tab ~= tabName and subframeData.frame.Visible then
-            subframeData.frame.Visible = false
-            expandedOptions[subframeData.name] = false
-        end
-    end
-    
-    repositionElements(tabName)
+-- ==================== EXIBIÇÃO INICIAL ====================
+for _, element in pairs(tabs["Main"].elements) do
+    local clonedElement = element:Clone()
+    clonedElement.Parent = MainContent
 end
 
-TabMain.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+MainContent.CanvasSize = UDim2.new(0, 0, 0, ContentListLayout.AbsoluteContentSize.Y + 20)
 
-TabMain.MouseButton1Click:Connect(function()
-    TabMain.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-    TabBuy.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabFarm.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabConfig.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabCredits.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    showTab("Main")
+-- ==================== EVENTOS DOS BOTÕES ====================
+CloseButton.Activated:Connect(function()
+    MainFrame.Visible = false
+    ShadowFrame.Visible = false
 end)
 
-TabBuy.MouseButton1Click:Connect(function()
-    TabMain.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabBuy.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-    TabFarm.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabConfig.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabCredits.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    showTab("Buy")
+FloatingButton.Activated:Connect(function()
+    MainFrame.Visible = not MainFrame.Visible
+    ShadowFrame.Visible = not ShadowFrame.Visible
 end)
 
-TabFarm.MouseButton1Click:Connect(function()
-    TabMain.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabBuy.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabFarm.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-    TabConfig.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabCredits.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    showTab("Farm")
-end)
-
-TabConfig.MouseButton1Click:Connect(function()
-    TabMain.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabBuy.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabFarm.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabConfig.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-    TabCredits.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    showTab("Config")
-end)
-
-TabCredits.MouseButton1Click:Connect(function()
-    TabMain.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabBuy.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabFarm.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabConfig.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TabCredits.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-    showTab("Credits")
-end)
-
+-- ==================== ARRASTAR MENU ====================
 local draggingBtn, dragStartBtn, startPosBtn
 FloatingButton.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -1063,14 +1000,7 @@ UserInputService.InputEnded:Connect(function(input)
     end
 end)
 
-FloatingButton.Activated:Connect(function()
-    MainFrame.Visible = not MainFrame.Visible
-end)
-
-CloseBtn.Activated:Connect(function()
-    MainFrame.Visible = false
-end)
-
+-- ==================== FUNÇÕES DE GAMEPLAY ====================
 local LP = game:GetService("Players").LocalPlayer
 local RS = game:GetService("ReplicatedStorage")
 
@@ -1391,6 +1321,7 @@ oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
     return oldNamecall(self, ...)
 end)
 
+-- ==================== SHIFT LOCK ====================
 local shiftLockSystemEnabled = false
 local shiftLockActive = false
 local shiftLockGui = nil
@@ -1452,61 +1383,23 @@ local function disableShiftLockSystem()
     end
 end
 
-local isShiftLock = createOption("Enable Shift Lock", false, "Config", function(active)
-    if active then
-        shiftLockSystemEnabled = true
-        
-        if not shiftLockGui then
-            shiftLockGui = Instance.new("ScreenGui")
-            shiftLockGui.Name = "ShiftLockGUI"
-            shiftLockGui.ResetOnSpawn = false
-            shiftLockGui.DisplayOrder = 999999
-            shiftLockGui.Parent = PlayerGui
-            
-            shiftLockBtn = Instance.new("ImageButton")
-            shiftLockBtn.Size = UDim2.new(0, 50, 0, 50)
-            shiftLockBtn.Position = UDim2.new(0.5, -25, 0.76, 0)
-            shiftLockBtn.BackgroundTransparency = 1
-            shiftLockBtn.Image = "rbxassetid://139211296111194"
-            shiftLockBtn.Parent = shiftLockGui
-            shiftLockBtn.ZIndex = 999999
-            
-            shiftLockBtn.Activated:Connect(function()
-                if shiftLockActive then
-                    disableShiftLockSystem()
-                else
+-- Atualizar Estado do Shift Lock quando Toggle é acionado
+for _, element in pairs(tabs["Config"].elements) do
+    if element.Name == "Enable Shift Lock" then
+        local SwitchBG = element:FindFirstChildOfClass("TextButton")
+        if SwitchBG then
+            local originalConnection = SwitchBG.Activated:Connect(function()
+                if optionStates["Enable Shift Lock"] then
+                    shiftLockSystemEnabled = true
                     enableShiftLockSystem()
+                else
+                    shiftLockSystemEnabled = false
+                    disableShiftLockSystem()
                 end
             end)
         end
-        
-        enableShiftLockSystem()
-    else
-        shiftLockSystemEnabled = false
-        
-        if shiftLockConnection then
-            shiftLockConnection:Disconnect()
-            shiftLockConnection = nil
-        end
-        
-        if shiftLockGui then
-            shiftLockGui:Destroy()
-            shiftLockGui = nil
-            shiftLockBtn = nil
-        end
-        
-        local character = Player.Character
-        if character then
-            local humanoid = character:FindFirstChildOfClass("Humanoid")
-            if humanoid then
-                humanoid.AutoRotate = true
-            end
-        end
-        
-        UserInputService.MouseBehavior = Enum.MouseBehavior.Default
-        shiftLockActive = false
     end
-end)
+end
 
 Player.CharacterAdded:Connect(function()
     task.wait(1)
