@@ -144,7 +144,7 @@ CloseButton.TextSize = 18
 CloseButton.Parent = TopBar
 CloseButton.ZIndex = 999999
 
--- ==================== CONTAINER DE ABAS ====================
+-- ==================== CONTAINER DE ABAS (FIXO) ====================
 local TabContainer = Instance.new("Frame")
 TabContainer.Name = "TabContainer"
 TabContainer.BackgroundTransparency = 1
@@ -152,18 +152,11 @@ TabContainer.Size = UDim2.new(0.25, 0, 1, -0.158)
 TabContainer.Position = UDim2.new(0, 0, 0.158, 0)
 TabContainer.Parent = MainFrame
 TabContainer.ZIndex = 999999
-
-local TabScrollFrame = Instance.new("ScrollingFrame")
-TabScrollFrame.Name = "TabScrollFrame"
-TabScrollFrame.BackgroundTransparency = 1
-TabScrollFrame.Size = UDim2.new(1, 0, 1, 0)
-TabScrollFrame.ScrollBarThickness = 0
-TabScrollFrame.Parent = TabContainer
-TabScrollFrame.ZIndex = 999999
+TabContainer.ClipsDescendants = true
 
 local TabListLayout = Instance.new("UIListLayout")
 TabListLayout.Padding = UDim.new(0, 5)
-TabListLayout.Parent = TabScrollFrame
+TabListLayout.Parent = TabContainer
 
 -- ==================== CONTAINER DE CONTEÚDO ====================
 local ContentContainer = Instance.new("Frame")
@@ -179,9 +172,10 @@ MainContent.Name = "MainContent"
 MainContent.BackgroundTransparency = 1
 MainContent.Size = UDim2.new(1, 0, 1, 0)
 MainContent.ScrollBarThickness = 2
-MainContent.CanvasSize = UDim2.new(0, 0, 0, 0)
+MainContent.CanvasSize = UDim2.new(0, 0, 0, 100)
 MainContent.Parent = ContentContainer
 MainContent.ZIndex = 999999
+MainContent.ClipsDescendants = true
 
 local ContentListLayout = Instance.new("UIListLayout")
 ContentListLayout.Padding = UDim.new(0, 8)
@@ -318,7 +312,7 @@ local function createTab(name, iconId)
     TabButton.Text = ""
     TabButton.Font = Enum.Font.SourceSansBold
     TabButton.TextSize = 16
-    TabButton.Parent = TabScrollFrame
+    TabButton.Parent = TabContainer
     TabButton.AutoButtonColor = false
     TabButton.ZIndex = 999999
 
@@ -353,16 +347,13 @@ local function createTab(name, iconId)
 
     TabButton.MouseButton1Click:Connect(function()
         if activeTab ~= name then
-            -- Desselecionar aba anterior
             for _, tab in pairs(tabs) do
                 tab.button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
             end
 
-            -- Selecionar aba atual
             activeTab = name
             TabButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
 
-            -- Atualizar conteúdo
             for _, child in pairs(MainContent:GetChildren()) do
                 if child:IsA("GuiObject") and child.Name ~= "UIListLayout" then
                     child:Destroy()
@@ -374,7 +365,9 @@ local function createTab(name, iconId)
                 clonedElement.Parent = MainContent
             end
 
-            MainContent.CanvasSize = UDim2.new(0, 0, 0, ContentListLayout.AbsoluteContentSize.Y + 20)
+            MainContent.CanvasPosition = Vector2.new(0, 0)
+            task.wait(0.05)
+            MainContent.CanvasSize = UDim2.new(0, 0, 0, ContentListLayout.AbsoluteContentSize.Y + 16)
         end
     end)
 
@@ -687,7 +680,7 @@ local function createSpecialButton(name, tabName, callback)
     table.insert(tabs[tabName].elements, Container)
 end
 
--- ==================== CRIAÇÃO DAS ABAS ====================
+-- ==================== CRIAÇÃO DAS ABAS (ORDEM CORRIGIDA) ====================
 tabs["Main"] = createTab("Main", "139357095045310")
 tabs["Farm"] = createTab("Farm", "102352181267949")
 tabs["Buy"] = createTab("Buy ALL", "110805385284419")
@@ -962,7 +955,8 @@ for _, element in pairs(tabs["Main"].elements) do
     clonedElement.Parent = MainContent
 end
 
-MainContent.CanvasSize = UDim2.new(0, 0, 0, ContentListLayout.AbsoluteContentSize.Y + 20)
+task.wait(0.05)
+MainContent.CanvasSize = UDim2.new(0, 0, 0, ContentListLayout.AbsoluteContentSize.Y + 16)
 
 -- ==================== EVENTOS DOS BOTÕES ====================
 CloseButton.Activated:Connect(function()
@@ -1383,7 +1377,6 @@ local function disableShiftLockSystem()
     end
 end
 
--- Atualizar Estado do Shift Lock quando Toggle é acionado
 for _, element in pairs(tabs["Config"].elements) do
     if element.Name == "Enable Shift Lock" then
         local SwitchBG = element:FindFirstChildOfClass("TextButton")
